@@ -1,0 +1,11 @@
+Region,Country,Weight,Lat,Long,weather_ref
+Alberta,Canada,0.25,"51°40'36.2""N ","113°12'03.1""W",1
+Saskatchewan,Canada,0.75,"51°20'05.3""N","104°27'20.7""W",2
+West,China,0.5,"28°08'09.8""N","104°32'53.4""E",3
+East,China,0.5,"27°54'11.9""N ","114°24'50.0""E",4
+France,France,1,"48°28'25.5""N","1°20'13.6""E",5
+Germany,Germany,1,"51°44'31.0""N","11°43'54.0""E",6
+Poland,Poland,1,"53°26'11.3""N","18°09'57.5""E",7
+India,India,1,"28°14'16.4""N","76°33'14.4""E",8
+West,Australia,0.5,"33°19'41.5""S","120°01'13.1""E",9
+East ,Australia,0.5,"35°27'11.1""S","146°52'47.3""E",10
