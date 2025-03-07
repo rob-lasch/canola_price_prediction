@@ -1,3 +1,4 @@
+import time
 import openmeteo_requests
 
 import requests_cache
@@ -17,7 +18,7 @@ def get_weather_hist(latitude, longitude):
 	params = {
 		"latitude": latitude,
 		"longitude": longitude,
-		"start_date": "2020-01-01",
+		"start_date": "2000-01-01",
 		"end_date": "2025-01-01",
 		"daily": ["temperature_2m_mean", "sunshine_duration", "precipitation_sum", "rain_sum", "snowfall_sum", "precipitation_hours", "wind_speed_10m_max", "wind_gusts_10m_max"],
 		"timezone": "GMT"
@@ -85,19 +86,21 @@ def process_monthly_data(df, location_ref_number):
 											'precip_time': 'max',
 											'max_wind': 'max',
 											'max_gust': 'max'})
-	df['loaction_ref'] = location_ref_number
+	df['location_ref'] = location_ref_number
 	return df
 
 
-weather_locations = pd.read_csv('../data/weather_data/weather_locations.csv')
+weather_locations = pd.read_csv('../data/input_data/weather_locations.csv')
 df_list = []
 for index, row in weather_locations.iterrows():
 	tmp_dataframe = get_weather_hist(row['lat_num'], row['lon_num'])
 	tmp_dataframe = process_monthly_data(tmp_dataframe, row['location_ref'])
 	df_list.append(tmp_dataframe)
+	# take a two minute break to otherwise you will trigger the API quota limit
+	time.sleep((2*60))
 
 result = pd.concat(df_list)
-result.to_csv('../data/weather_data/weather_data.csv')
+result.to_csv('../data/input_data/weather_data.csv')
 
 
 
